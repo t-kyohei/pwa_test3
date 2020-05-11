@@ -24,6 +24,15 @@ self.addEventListener('fetch', function(event) {
 });
 
 
-
+self.addEventListener('push', function(event) {
+	var data = event.data.json();
+	var title = data.title;
+	var icon = data.icon;
+	var body = data.body;
+	self.registration.showNotification(title, {
+		icon: icon,
+		body: body
+	})
+})
 
 
