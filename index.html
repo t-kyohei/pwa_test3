@@ -106,6 +106,7 @@ if ('serviceWorker' in navigator) {
 		if (subscription) return subscription;
 		registration.pushManager.subscribe({
 			userVisibleOnly: true
+			applicationServerKey: convertedVapidKey
 		}).then(function (subscription) {
 			console.log('購読を登録しました');
 			console.log(subscription.endpoint); 
