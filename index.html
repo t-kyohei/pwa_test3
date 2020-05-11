@@ -37,6 +37,20 @@
 function registSW() {
 // ServiceWorker登録：https://developers.google.com/web/fundamentals/primers/service-workers/?hl=ja
 
+// Base64形式をUnit8形式に変換する
+var urlBase64ToUint8Array = function(base64String) {
+  var padding = '='.repeat((4 - base64String.length % 4) % 4);
+  var base64 = (base64String + padding).replace(/\-/g, '+').replace(/_/g, '/');
+  var rawData = window.atob(base64);
+  var outputArray = new Uint8Array(rawData.length);
+  for (var i = 0; i < rawData.length; ++i) {
+    outputArray[i] = rawData.charCodeAt(i);
+  }
+  return outputArray;
+}
+var vapidPublicKey = 'BCQU1_nrPUUFceRvfUDCPAMrg2OPt3qgoV0StBkEfbhqceFPNpo98j-IJ3JQxer5o2K1nh7Y2ZihwclR661eqE8';  // Firebase Consoleから取得した公開鍵を指定
+var convertedVapidKey = urlBase64ToUint8Array(vapidPublicKey);
+
 if ('serviceWorker' in navigator) {
 
 /*
@@ -80,7 +94,8 @@ if ('serviceWorker' in navigator) {
   
   navigator.serviceWorker.ready.then(function(registration) {
 	return registration.pushManager.subscribe({
-		userVisibleOnly: true
+		userVisibleOnly: true,
+		applicationServerKey: convertedVapidKey
 	}).then(function (subscription) {
 		console.log('通知の購読を開始します');
 	});
