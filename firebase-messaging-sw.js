@@ -1,5 +1,5 @@
-var CACHE_NAME = 'pwa-push-test-caches';
-var urlsToCache = ['./index.html','./firebasejs/firebase-app.js','./firebasejs/firebase-messaging.js','./images/icon_loader.gif','./css/push.css'];
+var CACHE_NAME = 'pwa-push-test-caches2';
+var urlsToCache = ['./index.html','./css/push.css'];
 
 
 
